@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'support/factory_girl'
+OmniAuth.config.test_mode = true
 
 DatabaseCleaner.strategy = :truncation
 
@@ -25,12 +26,6 @@ RSpec.configure do |config|
 
 end
 
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
-end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -81,6 +76,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # config.include(OauthModule)
+
   RSpec.configure do |c|
   c.before(:each) do
     DatabaseCleaner.clean
@@ -89,4 +86,5 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
 end
