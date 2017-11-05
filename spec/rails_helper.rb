@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'support/factory_girl'
+
 OmniAuth.config.test_mode = true
 
 DatabaseCleaner.strategy = :truncation
