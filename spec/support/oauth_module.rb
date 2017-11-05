@@ -1,6 +1,6 @@
 module OauthModule
   def mock_auth_hash
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    OmniAuth.config.mock_auth[:github] = ({
       :provider => 'github',
       'info' => {
         'uid' => '26794850',
