@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
   get "/dashboard", to: "dashboard#index"
 
-  resources :groups, only: [:show] 
+  resources :groups, only: [:show] do
+    resources :feedback, only: [:new, :create]
+  end
 end
