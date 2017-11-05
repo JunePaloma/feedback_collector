@@ -10,3 +10,4 @@ module OauthModule
       }
     }
   end
+end
