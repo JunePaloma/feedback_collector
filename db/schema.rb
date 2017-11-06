@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105204418) do
+ActiveRecord::Schema.define(version: 20171106031959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20171105204418) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "group_id"
+    t.integer "giver_id"
+    t.integer "reviever_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_responses_on_giver_id"
+    t.index ["group_id"], name: "index_responses_on_group_id"
+    t.index ["reviever_id"], name: "index_responses_on_reviever_id"
+  end
+
   create_table "user_groups", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
@@ -45,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171105204418) do
   end
 
   add_foreign_key "groups", "projects"
+  add_foreign_key "responses", "groups"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
 end
