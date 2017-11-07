@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171107201359) do
+ActiveRecord::Schema.define(version: 20171107222322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171107201359) do
   create_table "feedbacks", force: :cascade do |t|
     t.bigint "group_id"
     t.integer "giver_id"
-    t.integer "reviever_id"
+    t.integer "receiver_id"
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20171107201359) do
     t.index ["giver_id"], name: "index_feedbacks_on_giver_id"
     t.index ["group_id"], name: "index_feedbacks_on_group_id"
     t.index ["question_id"], name: "index_feedbacks_on_question_id"
-    t.index ["reviever_id"], name: "index_feedbacks_on_reviever_id"
+    t.index ["receiver_id"], name: "index_feedbacks_on_receiver_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 20171107201359) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_surveys_on_project_id"
+  end
+
   create_table "user_groups", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
@@ -95,6 +103,7 @@ ActiveRecord::Schema.define(version: 20171107201359) do
   add_foreign_key "groups", "projects"
   add_foreign_key "question_options", "options"
   add_foreign_key "question_options", "questions"
+  add_foreign_key "surveys", "projects"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
 end
