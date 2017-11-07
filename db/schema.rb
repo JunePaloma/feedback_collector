@@ -10,16 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106042305) do
+ActiveRecord::Schema.define(version: 20171107193707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cohorts", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "group_id"
+    t.integer "giver_id"
+    t.integer "reviever_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "question_id"
+    t.index ["giver_id"], name: "index_feedbacks_on_giver_id"
+    t.index ["group_id"], name: "index_feedbacks_on_group_id"
+    t.index ["question_id"], name: "index_feedbacks_on_question_id"
+    t.index ["reviever_id"], name: "index_feedbacks_on_reviever_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
+    t.bigint "cohorts_id"
+    t.index ["cohorts_id"], name: "index_groups_on_cohorts_id"
     t.index ["project_id"], name: "index_groups_on_project_id"
   end
 
@@ -33,20 +56,6 @@ ActiveRecord::Schema.define(version: 20171106042305) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "responses", force: :cascade do |t|
-    t.bigint "group_id"
-    t.integer "giver_id"
-    t.integer "reviever_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "question_id"
-    t.index ["giver_id"], name: "index_responses_on_giver_id"
-    t.index ["group_id"], name: "index_responses_on_group_id"
-    t.index ["question_id"], name: "index_responses_on_question_id"
-    t.index ["reviever_id"], name: "index_responses_on_reviever_id"
   end
 
   create_table "user_groups", force: :cascade do |t|
@@ -64,9 +73,10 @@ ActiveRecord::Schema.define(version: 20171106042305) do
     t.string "name"
   end
 
+  add_foreign_key "feedbacks", "groups"
+  add_foreign_key "feedbacks", "questions"
+  add_foreign_key "groups", "cohorts", column: "cohorts_id"
   add_foreign_key "groups", "projects"
-  add_foreign_key "responses", "groups"
-  add_foreign_key "responses", "questions"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
 end
