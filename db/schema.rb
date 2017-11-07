@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20171107201359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
-    t.bigint "cohorts_id"
-    t.index ["cohorts_id"], name: "index_groups_on_cohorts_id"
+    t.bigint "cohort_id"
+    t.index ["cohort_id"], name: "index_groups_on_cohort_id"
     t.index ["project_id"], name: "index_groups_on_project_id"
   end
 
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20171107201359) do
 
   add_foreign_key "feedbacks", "groups"
   add_foreign_key "feedbacks", "questions"
-  add_foreign_key "groups", "cohorts", column: "cohorts_id"
+  add_foreign_key "groups", "cohorts"
   add_foreign_key "groups", "projects"
   add_foreign_key "question_options", "options"
   add_foreign_key "question_options", "questions"
