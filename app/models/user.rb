@@ -7,10 +7,11 @@ has_many :groups, through: :user_groups
   end
 
   def self.find_or_create_from_auth(auth)
-      user =  User.find_or_create_by(github_uid: auth['info']['uid'])
+      user =  User.find_or_create_by(github_uid: auth['uid'])
       user.name         = auth['info']['name']
       user.github_uid   = auth['uid']
-      user.github_token = auth['credentials']['token']
+
+      user.update(github_token: auth['credentials']['token'])
       user.save
       user
   end
