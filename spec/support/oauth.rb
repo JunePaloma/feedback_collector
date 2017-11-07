@@ -1,5 +1,7 @@
 module Oauth
+
   def mock_auth_hash
+    OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:github] = ({
       :provider => 'github',
       'info' => {

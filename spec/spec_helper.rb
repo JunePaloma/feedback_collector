@@ -96,6 +96,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
-  config.include(Oauth)
+
 end
-OmniAuth.config.test_mode = true

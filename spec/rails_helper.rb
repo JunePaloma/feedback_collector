@@ -8,15 +8,15 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'support/factory_girl'
-
-OmniAuth.config.test_mode = true
+require 'support/oauth'
 
 DatabaseCleaner.strategy = :truncation
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
+  config.include(Oauth)
+  
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
@@ -76,8 +76,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  config.include(Oauth)
 
   RSpec.configure do |c|
   c.before(:each) do
