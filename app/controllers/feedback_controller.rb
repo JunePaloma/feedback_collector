@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
   def new
-    @receiver = group.users.find(params[:reciever_id])
+    @receiver = group.users.find(params[:receiver_id])
     @response = Feedback.new(receiver: @receiver, giver: current_user, group: group)
     @questions = group.project.questions
   end
