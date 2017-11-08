@@ -1,6 +1,5 @@
 <h3> Please enter feedback for <%= @receiver.name %></h3>
 <h4> Project: <%= @group.project.name %><h4>
-
   <%=form_tag("/groups/#{params[:group_id]}/responses") do %>
   <% @questions.each do |question| %>
     <%= question.text %>
