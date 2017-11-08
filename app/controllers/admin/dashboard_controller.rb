@@ -1,5 +1,5 @@
-class Admin::DashboardController < Admin::Basecontroller
+class Admin::DashboardController < Admin::BaseController
   def index
-    
+
   end
 end
