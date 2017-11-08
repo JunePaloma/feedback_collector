@@ -3,7 +3,7 @@
   <%=form_tag("/groups/#{params[:group_id]}/responses") do %>
   <% @questions.each do |question| %>
     <%= question.text %>
-    <% select_tag "scores[#{question.id}]", question_options(question.options.order(:value), "id", "title") %>
+    <%= select_tag "scores[#{question.id}]", options_from_collection_for_select(question.options.order(:value), "id", "title") %>
     <% end %>
 
   <p><%= submit_tag "Submit" %></p>
