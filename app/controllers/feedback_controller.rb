@@ -8,7 +8,7 @@ class FeedbackController < ApplicationController
   def create
     params[:scores].each do |score|
     end
-    redirect_to dashboard_path
+    redirect_to group_path(group)
   end
 
   private
