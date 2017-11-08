@@ -3,7 +3,7 @@ has_many :user_groups
 has_many :groups, through: :user_groups
 
   def team_members(group_id)
-    @users = current_user.team_members(params[:id])
+    groups.find(group_id).users.where.not(id: self.id)
   end
 
   def self.find_or_create_from_auth(auth)

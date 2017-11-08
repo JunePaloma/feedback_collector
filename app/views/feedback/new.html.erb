@@ -1,4 +1,4 @@
-<h3> Please enter feedback for <%= @reviever.name %></h3>
+<h3> Please enter feedback for <%= @receiver.name %></h3>
 <h4> Project: <%= @group.project.name %><h4>
 
   <%=form_tag("/groups/#{params[:group_id]}/responses") do %>
@@ -8,4 +8,4 @@
     <% end %>
 
   <p><%= submit_tag "Submit" %></p>
-  <% end %>  
+  <% end %>
